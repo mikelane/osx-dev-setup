@@ -6,6 +6,12 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Awesomizing the prompt
+echo 'Awesomizing the terminal prompt...'
+cp .git-prompt.sh ~/.git-prompt.sh
+source ~/.git-prompt.sh
+echo 'export PS1="\u@\[\e[32m\]\h\[\e[0m\]:\W\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n \D{%F %T}\$ "' >> ${HOME}/.bash_profile
+
 # update and upgrade homebrew
 echo "Ensuring homebrew is fully up to date..."
 brew update
@@ -86,6 +92,10 @@ echo 'if [ -f $(brew --prefix)/etc/bash_completion ]; then' >> ${HOME}/.bash_pro
 echo '  . $(brew --prefix)/etc/bash_completion' >> ${HOME}/.bash_profile
 echo 'fi' >> ${HOME}/.bash_profile
 
+# Addition for hub
+echo -e '\n# Add hub to command line' >> ${HOME}/.bash_profile
+echo 'eval "$(hub alias -s)"' >> ${HOME}/.bash_profile
+
 # for cut-and-paste purposes
 # echo -e '' >> ${HOME}/.bash_profile
 # echo '' >> ${HOME}/.bash_profile
@@ -113,3 +123,5 @@ brew cask install --appdir="/Applications" ${apps[@]}
 
 # Clean up our mess.
 brew cleanup
+
+source ~/.bash_profile
