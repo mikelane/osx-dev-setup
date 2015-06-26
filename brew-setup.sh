@@ -27,6 +27,7 @@ brew tap homebrew/versions
 # List of useful binaries.
 binaries=(
   ack
+  autoconf
   autojump
   bash
   bash-completion
@@ -36,6 +37,7 @@ binaries=(
   colordiff
   composer
   coreutils
+  emacs
   ffmpeg
   findutils
   gdbm
@@ -45,22 +47,27 @@ binaries=(
   htop-osx
   hub
   imagemagick
+  lame
+  libtiff
+  libvo-aacenc
   mysql
   node
   php55
   php55-xdebug
   php56
   php56-xdebug
+  python
   rename
   rlwrap
   sqlite
+  tmux
   trash
   tree
-  unixodbc
   vim
   webkit2png
   wget
-  zlib
+  x264
+  xvid
   zopfli
 )
 
@@ -73,7 +80,7 @@ brew install ${binaries[@]}
 echo -e '\nMaking required ~/.bash_profile additions'
 echo -e '\n# Homebrew bin dir path.' >> ${HOME}/.bash_profile
 echo 'PATH=/usr/local/bin:\$PATH"' >> ${HOME}/.bash_profile
-echo -e 'OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are using the brew version you need to make sure /usr/local/sbin is before /usr/sbin in your PATH:' >> ${HOME}/.bash_profile
+echo -e 'OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are \nusing the brew version you need to make sure /usr/local/sbin is before \n/usr/sbin in your PATH:' >> ${HOME}/.bash_profile
 echo 'PATH="/usr/local/sbin:$PATH"' >> ${HOME}/.bash_profile
 
 # coreutils
@@ -100,7 +107,13 @@ echo 'eval "$(hub alias -s)"' >> ${HOME}/.bash_profile
 echo 'Awesomizing the terminal prompt...'
 cp .git-prompt.sh ~/.git-prompt.sh
 source ~/.git-prompt.sh
+echo -e '\n# Make the prompt useful' >> ${HOME}/.bash_profile
 echo 'export PS1="\u@\[\e[32m\]\h\[\e[0m\]:\W\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n \D{%F %T}\$ "' >> ${HOME}/.bash_profile
+
+# Adding useful aliases
+echo -e '\n# Useful Aliases' >> ${HOME}/.bash_profile
+echo 'alias ls="ls -acFGgho"' >> ${HOME}/.bash_profile
+echo 'alias root="cd ${HOME} && clear"' >> ${HOME}/.bash_profile
 
 # for cut-and-paste purposes
 # echo -e '' >> ${HOME}/.bash_profile
@@ -123,6 +136,7 @@ apps=(
   evernote
   textexpander
   firefox
+  atom
 )
 
 # Install apps to /Applications
