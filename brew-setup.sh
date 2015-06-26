@@ -18,33 +18,6 @@ brew tap caskroom/cask
 brew tap homebrew/homebrew-php
 brew tap homebrew/versions
 
-# Add required lines to your ~/.bash_profile/
-# Prepend local bin directory to your PATH to prefer Homebrew packages over system defaults
-echo -e '\n# Homebrew bin dir path.' >> ${HOME}/.bash_profile
-echo 'PATH=/usr/local/bin:\$PATH"' >> ${HOME}/.bash_profile
-echo -e 'OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are using the brew version you need to make sure /usr/local/sbin is before /usr/sbin in your PATH:' >> ${HOME}/.bash_profile
-echo 'PATH="/usr/local/sbin:$PATH"' >> ${HOME}/.bash_profile
-
-# coreutils
-echo -e '\n# Use coreutils commands with regular bash names.' >> ${HOME}/.bash_profile
-echo 'PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"' >> ${HOME}/.bash_profile
-echo -e '\n# Add the coreutils MANPATH' >> ${HOME}/.bash_profile
-echo 'MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"' >> ${HOME}/.bash_profile
-
-# Add autojump
-echo -e '\n# Use autojump' >> ${HOME}/.bash_profile
-echo '[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh' >> ${HOME}/.bash_profile
-
-# Add bash-completion
-echo -e '\n# Use bash-completion' >> ${HOME}/.bash_profile
-echo 'if [ -f $(brew --prefix)/etc/bash_completion ]; then' >> ${HOME}/.bash_profile
-echo '  . $(brew --prefix)/etc/bash_completion' >> ${HOME}/.bash_profile
-echo 'fi' >> ${HOME}/.bash_profile
-
-
-echo -e '' >> ${HOME}/.bash_profile
-echo '' >> ${HOME}/.bash_profile
-
 # List of useful binaries.
 binaries=(
   ack
@@ -86,8 +59,36 @@ binaries=(
 )
 
 # Install the previous binaries
-echo "Installing binaries..."
+echo -e '\nInstalling binaries...'
 brew install ${binaries[@]}
+
+echo -e '\nMaking required ~/.bash_profile additions'
+# Add required lines to your ~/.bash_profile/
+# Prepend local bin directory to your PATH to prefer Homebrew packages over system defaults
+echo -e '\n# Homebrew bin dir path.' >> ${HOME}/.bash_profile
+echo 'PATH=/usr/local/bin:\$PATH"' >> ${HOME}/.bash_profile
+echo -e 'OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are using the brew version you need to make sure /usr/local/sbin is before /usr/sbin in your PATH:' >> ${HOME}/.bash_profile
+echo 'PATH="/usr/local/sbin:$PATH"' >> ${HOME}/.bash_profile
+
+# coreutils
+echo -e '\n# Use coreutils commands with regular bash names.' >> ${HOME}/.bash_profile
+echo 'PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"' >> ${HOME}/.bash_profile
+echo -e '\n# Add the coreutils MANPATH' >> ${HOME}/.bash_profile
+echo 'MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"' >> ${HOME}/.bash_profile
+
+# Add autojump
+echo -e '\n# Use autojump' >> ${HOME}/.bash_profile
+echo '[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh' >> ${HOME}/.bash_profile
+
+# Add bash-completion
+echo -e '\n# Use bash-completion' >> ${HOME}/.bash_profile
+echo 'if [ -f $(brew --prefix)/etc/bash_completion ]; then' >> ${HOME}/.bash_profile
+echo '  . $(brew --prefix)/etc/bash_completion' >> ${HOME}/.bash_profile
+echo 'fi' >> ${HOME}/.bash_profile
+
+# for cut-and-paste purposes
+# echo -e '' >> ${HOME}/.bash_profile
+# echo '' >> ${HOME}/.bash_profile
 
 # List of useful apps to install using cask
 apps=(
