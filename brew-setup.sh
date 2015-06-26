@@ -62,9 +62,9 @@ binaries=(
 echo -e '\nInstalling binaries...'
 brew install ${binaries[@]}
 
-echo -e '\nMaking required ~/.bash_profile additions'
 # Add required lines to your ~/.bash_profile/
 # Prepend local bin directory to your PATH to prefer Homebrew packages over system defaults
+echo -e '\nMaking required ~/.bash_profile additions'
 echo -e '\n# Homebrew bin dir path.' >> ${HOME}/.bash_profile
 echo 'PATH=/usr/local/bin:\$PATH"' >> ${HOME}/.bash_profile
 echo -e 'OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are using the brew version you need to make sure /usr/local/sbin is before /usr/sbin in your PATH:' >> ${HOME}/.bash_profile
