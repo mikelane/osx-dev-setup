@@ -2,20 +2,20 @@
 
 # Check for homebrew and install if not found
 if test ! $(which brew); then
-  echo "Installing homebrew..."
+  echo '\nInstalling homebrew...'
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Awesomizing the prompt
-echo 'Awesomizing the terminal prompt...'
-cp .git-prompt.sh ~/.git-prompt.sh
-source ~/.git-prompt.sh
-echo 'export PS1="\u@\[\e[32m\]\h\[\e[0m\]:\W\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n \D{%F %T}\$ "' >> ${HOME}/.bash_profile
+# Creating freshbrew
+echo -e '\nAdding in a one-stop homebrew update function...'
+echo -e '\nfreshbrew() {\n  brew update\n  brew upgrade\n  brew cleanup\n  brew prune\n  brew doctor\n}\n' >> ${HOME}/.bash_profile
+
+# Sourcing the bash profile
+source ${HOME}/.bash_profile
 
 # update and upgrade homebrew
 echo "Ensuring homebrew is fully up to date..."
-brew update
-brew upgrade --all
+freshbrew
 
 # Add in some other useful repos
 echo "Tapping other useful repos..."
@@ -96,9 +96,18 @@ echo 'fi' >> ${HOME}/.bash_profile
 echo -e '\n# Add hub to command line' >> ${HOME}/.bash_profile
 echo 'eval "$(hub alias -s)"' >> ${HOME}/.bash_profile
 
+# Awesomizing the prompt
+echo 'Awesomizing the terminal prompt...'
+cp .git-prompt.sh ~/.git-prompt.sh
+source ~/.git-prompt.sh
+echo 'export PS1="\u@\[\e[32m\]\h\[\e[0m\]:\W\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n \D{%F %T}\$ "' >> ${HOME}/.bash_profile
+
 # for cut-and-paste purposes
 # echo -e '' >> ${HOME}/.bash_profile
 # echo '' >> ${HOME}/.bash_profile
+
+# Sourcing the bash profile
+source ${HOME}/.bash_profile
 
 # List of useful apps to install using cask
 apps=(
@@ -122,6 +131,4 @@ echo "installing apps..."
 brew cask install --appdir="/Applications" ${apps[@]}
 
 # Clean up our mess.
-brew cleanup
-
-source ~/.bash_profile
+freshbrew
