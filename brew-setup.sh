@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Make a backup copy of .bash_profile
+if test -e ${HOME}/.bash_profile; then
+  echo 'Copying ~/.bash_profile to ~/.bash_profile.old ...'
+  cp ${HOME}/.bash_profile ${HOME}/.bash_profile.old
+fi
+
 # Check for homebrew and install if not found
 if test ! $(which brew); then
   echo '\nInstalling homebrew...'
@@ -7,7 +13,7 @@ if test ! $(which brew); then
 fi
 
 # Creating freshbrew
-echo -e '\nAdding in a one-stop homebrew update function...'
+echo -e '\nAdding in a one-stop homebrew update function.\nAfter this, you can use the command freshbrew to update homebrew and installs'
 echo -e '\nfreshbrew() {\n  brew update\n  brew upgrade\n  brew cleanup\n  brew prune\n  brew doctor\n}\n' >> ${HOME}/.bash_profile
 
 # Sourcing the bash profile
