@@ -120,6 +120,16 @@ echo 'export PS1="\u@\[\e[32m\]\h\[\e[0m\]:\W\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0
 echo -e '\n# Useful Aliases' >> ${HOME}/.bash_profile
 echo 'alias ls="ls -acFGgho"' >> ${HOME}/.bash_profile
 echo 'alias root="cd ${HOME} && clear"' >> ${HOME}/.bash_profile
+echo 'alias gs="git status"' >> ${HOME}/.bash_profile
+echo 'alias ga="git add"' >> ${HOME}/.bash_profile
+echo 'alias gb="git branch"' >> ${HOME}/.bash_profile
+echo 'alias gc="git commit"' >> ${HOME}/.bash_profile
+echo 'alias gd="git diff"' >> ${HOME}/.bash_profile
+echo 'alias go="git checkout"' >> ${HOME}/.bash_profile
+echo 'alias gk="gitk --all&"' >> ${HOME}/.bash_profile
+echo 'alias gx="gitx --all"' >> ${HOME}/.bash_profile
+echo 'alias got="git"' >> ${HOME}/.bash_profile
+echo 'alias get="git"' >> ${HOME}/.bash_profile
 
 # for cut-and-paste purposes
 # echo -e '' >> ${HOME}/.bash_profile
