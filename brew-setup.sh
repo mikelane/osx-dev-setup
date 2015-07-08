@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Make a backup copy of .bash_profile
-if test -e ${HOME}/.bash_profile; then
+if [ -e "${HOME}/.bash_profile" ]; then
   echo 'Copying ~/.bash_profile to ~/.bash_profile.old ...'
   cp ${HOME}/.bash_profile ${HOME}/.bash_profile.old
 fi
@@ -14,9 +14,10 @@ fi
 
 # Creating freshbrew
 echo -e '\nAdding in a one-stop homebrew update function.\nAfter this, you can use the command freshbrew to update homebrew and installs'
+echo -e '\n# freshbrew. From the command prompt type freshbrew to update your homebrew and installed \n' >> ${HOME}/.bash_profile
 echo -e '\nfreshbrew() {\n  brew update\n  brew upgrade\n  brew cleanup\n  brew prune\n  brew doctor\n}\n' >> ${HOME}/.bash_profile
 
-# Sourcing the bash profile
+# Sourcing the bash profile so that we can use freshbrew right away.
 source ${HOME}/.bash_profile
 
 # update and upgrade homebrew
@@ -85,7 +86,7 @@ brew install ${binaries[@]}
 # Prepend local bin directory to your PATH to prefer Homebrew packages over system defaults
 echo -e '\nMaking required ~/.bash_profile additions'
 echo -e '\n# Homebrew bin dir path.' >> ${HOME}/.bash_profile
-echo 'PATH=/usr/local/bin:\$PATH"' >> ${HOME}/.bash_profile
+echo 'PATH="/usr/local/bin:$PATH"' >> ${HOME}/.bash_profile
 echo -e 'OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are \nusing the brew version you need to make sure /usr/local/sbin is before \n/usr/sbin in your PATH:' >> ${HOME}/.bash_profile
 echo 'PATH="/usr/local/sbin:$PATH"' >> ${HOME}/.bash_profile
 
@@ -114,6 +115,7 @@ echo 'Awesomizing the terminal prompt...'
 cp .git-prompt.sh ~/.git-prompt.sh
 source ~/.git-prompt.sh
 echo -e '\n# Make the prompt useful' >> ${HOME}/.bash_profile
+echo 'export PS1="\[\e[34m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\]:\[\e[33m\][\w]\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n<<\D{%F %T}>> \$"' >> ${HOME}/.bash_profile
 echo 'export PS1="\u@\[\e[32m\]\h\[\e[0m\]:\W\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n \D{%F %T}\$ "' >> ${HOME}/.bash_profile
 
 # Adding useful aliases
