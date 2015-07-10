@@ -2,9 +2,13 @@
 
 # Make a backup copy of .bash_profile
 if [ -e "${HOME}/.bash_profile" ]; then
-  echo 'Copying ~/.bash_profile to ~/.bash_profile.old ...'
-  cp ${HOME}/.bash_profile ${HOME}/.bash_profile.old
+  echo 'Moving ~/.bash_profile to ~/.bash_profile.old ...'
+  mv ${HOME}/.bash_profile ${HOME}/.bash_profile.old
 fi
+
+# Make sure that the ~/.bashrc is sourced
+echo -e '\n# Sourcing ~/.bashrc if required...'
+echo -e 'if [ -f "${HOME}/.bashrc" ]; then\n  source "${HOME}/.bashrc"\nfi' >> ${HOME}/.bash_profile
 
 # Check for homebrew and install if not found
 if test ! $(which brew); then
@@ -13,7 +17,7 @@ if test ! $(which brew); then
 fi
 
 # Creating freshbrew
-echo -e '\nAdding in a one-stop homebrew update function.\nAfter this, you can use the command freshbrew to update homebrew and installs'
+echo -e '\n\nAdding in a one-stop homebrew update function.\nAfter this, you can use the command freshbrew to update homebrew and installs'
 echo -e '\n# freshbrew. From the command prompt type freshbrew to update your homebrew and installed \n' >> ${HOME}/.bash_profile
 echo -e '\nfreshbrew() {\n  brew update\n  brew upgrade\n  brew cleanup\n  brew prune\n  brew doctor\n}\n' >> ${HOME}/.bash_profile
 
@@ -87,7 +91,7 @@ brew install ${binaries[@]}
 echo -e '\nMaking required ~/.bash_profile additions'
 echo -e '\n# Homebrew bin dir path.' >> ${HOME}/.bash_profile
 echo 'PATH="/usr/local/bin:$PATH"' >> ${HOME}/.bash_profile
-echo -e 'OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are \nusing the brew version you need to make sure /usr/local/sbin is before \n/usr/sbin in your PATH:' >> ${HOME}/.bash_profile
+echo -e '\n# OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are \n# using the brew version you need to make sure /usr/local/sbin is before \n# /usr/sbin in your PATH:' >> ${HOME}/.bash_profile
 echo 'PATH="/usr/local/sbin:$PATH"' >> ${HOME}/.bash_profile
 
 # coreutils
@@ -107,16 +111,15 @@ echo '  . $(brew --prefix)/etc/bash_completion' >> ${HOME}/.bash_profile
 echo 'fi' >> ${HOME}/.bash_profile
 
 # Addition for hub
-echo -e '\n# Add hub to command line' >> ${HOME}/.bash_profile
-echo 'eval "$(hub alias -s)"' >> ${HOME}/.bash_profile
+# echo -e '\n# Add hub to command line' >> ${HOME}/.bash_profile
+# echo 'eval "$(hub alias -s)"' >> ${HOME}/.bash_profile
 
 # Awesomizing the prompt
 echo 'Awesomizing the terminal prompt...'
-cp .git-prompt.sh ~/.git-prompt.sh
+cp git-prompt.sh ~/.git-prompt.sh
 source ~/.git-prompt.sh
 echo -e '\n# Make the prompt useful' >> ${HOME}/.bash_profile
-echo 'export PS1="\[\e[34m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\]:\[\e[33m\][\w]\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n<<\D{%F %T}>> \$"' >> ${HOME}/.bash_profile
-echo 'export PS1="\u@\[\e[32m\]\h\[\e[0m\]:\W\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n \D{%F %T}\$ "' >> ${HOME}/.bash_profile
+echo 'export PS1="\[\e[34m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\]:\[\e[33m\][\w]\[\e[36m\]$(__git_ps1 "{%s}")\[\e[0m\]\n<<\D{%F %T}>> \$ "' >> ${HOME}/.bash_profile
 
 # Adding useful aliases
 echo -e '\n# Useful Aliases' >> ${HOME}/.bash_profile
