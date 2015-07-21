@@ -52,7 +52,6 @@ binaries=(
   brew-php-switcher
   cask
   colordiff
-  composer
   coreutils
   emacs
   ffmpeg
@@ -73,6 +72,7 @@ binaries=(
   php55-xdebug
   php56
   php56-xdebug
+  composer
   python
   rbenv
   ruby-build
