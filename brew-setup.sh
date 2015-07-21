@@ -185,7 +185,6 @@ apps=(
   caffeine
   iterm2
   dropbox
-  flash
   phpstorm
   1password
   adium
