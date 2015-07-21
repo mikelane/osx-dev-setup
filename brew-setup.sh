@@ -202,3 +202,6 @@ brew cask install --appdir="/Applications" ${apps[@]}
 
 # Clean up our mess.
 freshbrew
+
+# Set up better Mac settings
+eval bash improved_defaults.sh
